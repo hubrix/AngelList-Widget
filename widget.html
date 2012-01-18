@@ -1,0 +1,26 @@
+<html>
+<head>
+<script src="jquery.js"></script>
+<script src="pure.js"></script>
+<script src="urlvars.js"></script>
+</head>
+<body>
+<div class="template" border=1>
+ <img src="http://angel.co/images/logo_38pt.gif"><br/>
+ <a></a>
+</div>
+<script>
+$(document).ready(function(){
+  $.ajax({
+   url: 'http://api.angel.co/1/startups/'+$.getUrlVar('n'),
+   dataType: "jsonp",
+   crossDomain: "true",
+   success: function(data){
+    $('div.template').directives({ 'a':function(arg){return '<img src="'+ arg.context.logo_url+'">';}, 'a@href':'angellist_url' }).render(data) ;
+  }
+
+  });
+});
+</script>
+</body>
+</html>
